@@ -1,0 +1,1818 @@
+                      :-) GROMACS - gmx mdrun, 2020.3 (-:
+
+                            GROMACS is written by:
+     Emile Apol      Rossen Apostolov      Paul Bauer     Herman J.C. Berendsen
+    Par Bjelkmar      Christian Blau   Viacheslav Bolnykh     Kevin Boyd    
+ Aldert van Buuren   Rudi van Drunen     Anton Feenstra       Alan Gray     
+  Gerrit Groenhof     Anca Hamuraru    Vincent Hindriksen  M. Eric Irrgang  
+  Aleksei Iupinov   Christoph Junghans     Joe Jordan     Dimitrios Karkoulis
+    Peter Kasson        Jiri Kraus      Carsten Kutzner      Per Larsson    
+  Justin A. Lemkul    Viveca Lindahl    Magnus Lundborg     Erik Marklund   
+    Pascal Merz     Pieter Meulenhoff    Teemu Murtola       Szilard Pall   
+    Sander Pronk      Roland Schulz      Michael Shirts    Alexey Shvetsov  
+   Alfons Sijbers     Peter Tieleman      Jon Vincent      Teemu Virolainen 
+ Christian Wennberg    Maarten Wolf      Artem Zhmurov   
+                           and the project leaders:
+        Mark Abraham, Berk Hess, Erik Lindahl, and David van der Spoel
+
+Copyright (c) 1991-2000, University of Groningen, The Netherlands.
+Copyright (c) 2001-2019, The GROMACS development team at
+Uppsala University, Stockholm University and
+the Royal Institute of Technology, Sweden.
+check out http://www.gromacs.org for more information.
+
+GROMACS is free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License
+as published by the Free Software Foundation; either version 2.1
+of the License, or (at your option) any later version.
+
+GROMACS:      gmx mdrun, version 2020.3
+Executable:   /usr/local/gromacs/bin/gmx
+Data prefix:  /usr/local/gromacs
+Working dir:  /home/alan/Documentos/estancia/pdb/procesados/p3
+Process ID:   13523
+Command line:
+  gmx mdrun -v -deffnm nvt
+
+GROMACS version:    2020.3
+Verified release checksum is c0599e547549c2d0ef4fc678dc5a26ad0000eab045e938fed756f9ff5b99a197
+Precision:          single
+Memory model:       64 bit
+MPI library:        thread_mpi
+OpenMP support:     enabled (GMX_OPENMP_MAX_THREADS = 64)
+GPU support:        disabled
+SIMD instructions:  SSE4.1
+FFT library:        fftw-3.3.8-sse2
+RDTSCP usage:       enabled
+TNG support:        enabled
+Hwloc support:      hwloc-2.2.0
+Tracing support:    disabled
+C compiler:         /usr/bin/cc GNU 10.2.0
+C compiler flags:   -msse4.1 -fexcess-precision=fast -funroll-all-loops -O3 -DNDEBUG
+C++ compiler:       /usr/bin/c++ GNU 10.2.0
+C++ compiler flags: -msse4.1 -fexcess-precision=fast -funroll-all-loops -fopenmp -O3 -DNDEBUG
+
+
+Running on 1 node with total 4 cores, 4 logical cores
+Hardware detected:
+  CPU info:
+    Vendor: Intel
+    Brand:  Intel(R) Pentium(R) CPU  N3710  @ 1.60GHz
+    Family: 6   Model: 76   Stepping: 4
+    Features: aes apic clfsh cmov cx8 cx16 htt intel lahf mmx msr nonstop_tsc pclmuldq pdcm popcnt pse rdrnd rdtscp sse2 sse3 sse4.1 sse4.2 ssse3 tdt
+  Hardware topology: Full, with devices
+    Sockets, cores, and logical processors:
+      Socket  0: [   0] [   1] [   2] [   3]
+    Numa nodes:
+      Node  0 (4035821568 bytes mem):   0   1   2   3
+      Latency:
+               0
+         0  1.00
+    Caches:
+      L1: 24576 bytes, linesize 64 bytes, assoc. 6, shared 1 ways
+      L2: 1048576 bytes, linesize 64 bytes, assoc. 16, shared 2 ways
+    PCI devices:
+      0000:00:02.0  Id: 8086:22b1  Class: 0x0300  Numa: 0
+      0000:00:13.0  Id: 8086:22a3  Class: 0x0106  Numa: 0
+      0000:02:00.0  Id: 8086:3166  Class: 0x0280  Numa: 0
+      0000:03:00.0  Id: 10ec:8136  Class: 0x0200  Numa: 0
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+M. J. Abraham, T. Murtola, R. Schulz, S. Páll, J. C. Smith, B. Hess, E.
+Lindahl
+GROMACS: High performance molecular simulations through multi-level
+parallelism from laptops to supercomputers
+SoftwareX 1 (2015) pp. 19-25
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Páll, M. J. Abraham, C. Kutzner, B. Hess, E. Lindahl
+Tackling Exascale Software Challenges in Molecular Dynamics Simulations with
+GROMACS
+In S. Markidis & E. Laure (Eds.), Solving Software Challenges for Exascale 8759 (2015) pp. 3-27
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Pronk, S. Páll, R. Schulz, P. Larsson, P. Bjelkmar, R. Apostolov, M. R.
+Shirts, J. C. Smith, P. M. Kasson, D. van der Spoel, B. Hess, and E. Lindahl
+GROMACS 4.5: a high-throughput and highly parallel open source molecular
+simulation toolkit
+Bioinformatics 29 (2013) pp. 845-54
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+B. Hess and C. Kutzner and D. van der Spoel and E. Lindahl
+GROMACS 4: Algorithms for highly efficient, load-balanced, and scalable
+molecular simulation
+J. Chem. Theory Comput. 4 (2008) pp. 435-447
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+D. van der Spoel, E. Lindahl, B. Hess, G. Groenhof, A. E. Mark and H. J. C.
+Berendsen
+GROMACS: Fast, Flexible and Free
+J. Comp. Chem. 26 (2005) pp. 1701-1719
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+E. Lindahl and B. Hess and D. van der Spoel
+GROMACS 3.0: A package for molecular simulation and trajectory analysis
+J. Mol. Mod. 7 (2001) pp. 306-317
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+H. J. C. Berendsen, D. van der Spoel and R. van Drunen
+GROMACS: A message-passing parallel molecular dynamics implementation
+Comp. Phys. Comm. 91 (1995) pp. 43-56
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE CITE THE DOI FOR THIS VERSION OF GROMACS ++++
+https://doi.org/10.5281/zenodo.3923645
+-------- -------- --- Thank You --- -------- --------
+
+Input Parameters:
+   integrator                     = md
+   tinit                          = 0
+   dt                             = 0.002
+   nsteps                         = 50000
+   init-step                      = 0
+   simulation-part                = 1
+   comm-mode                      = Linear
+   nstcomm                        = 100
+   bd-fric                        = 0
+   ld-seed                        = -1760208385
+   emtol                          = 10
+   emstep                         = 0.01
+   niter                          = 20
+   fcstep                         = 0
+   nstcgsteep                     = 1000
+   nbfgscorr                      = 10
+   rtpi                           = 0.05
+   nstxout                        = 500
+   nstvout                        = 500
+   nstfout                        = 0
+   nstlog                         = 500
+   nstcalcenergy                  = 100
+   nstenergy                      = 500
+   nstxout-compressed             = 0
+   compressed-x-precision         = 1000
+   cutoff-scheme                  = Verlet
+   nstlist                        = 10
+   pbc                            = xyz
+   periodic-molecules             = false
+   verlet-buffer-tolerance        = 0.005
+   rlist                          = 1
+   coulombtype                    = PME
+   coulomb-modifier               = Potential-shift
+   rcoulomb-switch                = 0
+   rcoulomb                       = 1
+   epsilon-r                      = 1
+   epsilon-rf                     = inf
+   vdw-type                       = Cut-off
+   vdw-modifier                   = Potential-shift
+   rvdw-switch                    = 0
+   rvdw                           = 1
+   DispCorr                       = EnerPres
+   table-extension                = 1
+   fourierspacing                 = 0.16
+   fourier-nx                     = 42
+   fourier-ny                     = 42
+   fourier-nz                     = 42
+   pme-order                      = 4
+   ewald-rtol                     = 1e-05
+   ewald-rtol-lj                  = 0.001
+   lj-pme-comb-rule               = Geometric
+   ewald-geometry                 = 0
+   epsilon-surface                = 0
+   tcoupl                         = V-rescale
+   nsttcouple                     = 10
+   nh-chain-length                = 0
+   print-nose-hoover-chain-variables = false
+   pcoupl                         = No
+   pcoupltype                     = Isotropic
+   nstpcouple                     = -1
+   tau-p                          = 1
+   compressibility (3x3):
+      compressibility[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      compressibility[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      compressibility[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   ref-p (3x3):
+      ref-p[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      ref-p[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      ref-p[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   refcoord-scaling               = No
+   posres-com (3):
+      posres-com[0]= 0.00000e+00
+      posres-com[1]= 0.00000e+00
+      posres-com[2]= 0.00000e+00
+   posres-comB (3):
+      posres-comB[0]= 0.00000e+00
+      posres-comB[1]= 0.00000e+00
+      posres-comB[2]= 0.00000e+00
+   QMMM                           = false
+   QMconstraints                  = 0
+   QMMMscheme                     = 0
+   MMChargeScaleFactor            = 1
+qm-opts:
+   ngQM                           = 0
+   constraint-algorithm           = Lincs
+   continuation                   = false
+   Shake-SOR                      = false
+   shake-tol                      = 0.0001
+   lincs-order                    = 4
+   lincs-iter                     = 1
+   lincs-warnangle                = 30
+   nwall                          = 0
+   wall-type                      = 9-3
+   wall-r-linpot                  = -1
+   wall-atomtype[0]               = -1
+   wall-atomtype[1]               = -1
+   wall-density[0]                = 0
+   wall-density[1]                = 0
+   wall-ewald-zfac                = 3
+   pull                           = false
+   awh                            = false
+   rotation                       = false
+   interactiveMD                  = false
+   disre                          = No
+   disre-weighting                = Conservative
+   disre-mixed                    = false
+   dr-fc                          = 1000
+   dr-tau                         = 0
+   nstdisreout                    = 100
+   orire-fc                       = 0
+   orire-tau                      = 0
+   nstorireout                    = 100
+   free-energy                    = no
+   cos-acceleration               = 0
+   deform (3x3):
+      deform[    0]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    1]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+      deform[    2]={ 0.00000e+00,  0.00000e+00,  0.00000e+00}
+   simulated-tempering            = false
+   swapcoords                     = no
+   userint1                       = 0
+   userint2                       = 0
+   userint3                       = 0
+   userint4                       = 0
+   userreal1                      = 0
+   userreal2                      = 0
+   userreal3                      = 0
+   userreal4                      = 0
+   applied-forces:
+     electric-field:
+       x:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+       y:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+       z:
+         E0                       = 0
+         omega                    = 0
+         t0                       = 0
+         sigma                    = 0
+     density-guided-simulation:
+       active                     = false
+       group                      = protein
+       similarity-measure         = inner-product
+       atom-spreading-weight      = unity
+       force-constant             = 1e+09
+       gaussian-transform-spreading-width = 0.2
+       gaussian-transform-spreading-range-in-multiples-of-width = 4
+       reference-density-filename = reference.mrc
+       nst                        = 1
+       normalize-densities        = true
+       adaptive-force-scaling     = false
+       adaptive-force-scaling-time-constant = 4
+grpopts:
+   nrdf:     1279.93     54417.1
+   ref-t:         300         300
+   tau-t:         0.1         0.1
+annealing:          No          No
+annealing-npoints:           0           0
+   acc:	           0           0           0
+   nfreeze:           N           N           N
+   energygrp-flags[  0]: 0
+
+Changing nstlist from 10 to 50, rlist from 1 to 1.109
+
+Using 1 MPI thread
+
+Non-default thread affinity set, disabling internal thread affinity
+
+Using 4 OpenMP threads 
+
+System total charge: 0.000
+Will do PME sum in reciprocal space for electrostatic interactions.
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+U. Essmann, L. Perera, M. L. Berkowitz, T. Darden, H. Lee and L. G. Pedersen 
+A smooth particle mesh Ewald method
+J. Chem. Phys. 103 (1995) pp. 8577-8592
+-------- -------- --- Thank You --- -------- --------
+
+Using a Gaussian width (1/beta) of 0.320163 nm for Ewald
+Potential shift: LJ r^-12: -1.000e+00 r^-6: -1.000e+00, Ewald -1.000e-05
+Initialized non-bonded Ewald tables, spacing: 9.33e-04 size: 1073
+
+Generated table with 1054 data points for 1-4 COUL.
+Tabscale = 500 points/nm
+Generated table with 1054 data points for 1-4 LJ6.
+Tabscale = 500 points/nm
+Generated table with 1054 data points for 1-4 LJ12.
+Tabscale = 500 points/nm
+
+Using SIMD 4x4 nonbonded short-range kernels
+
+Using a dual 4x4 pair-list setup updated with dynamic pruning:
+  outer list: updated every 50 steps, buffer 0.109 nm, rlist 1.109 nm
+  inner list: updated every 12 steps, buffer 0.002 nm, rlist 1.002 nm
+At tolerance 0.005 kJ/mol/ps per atom, equivalent classical 1x1 list would be:
+  outer list: updated every 50 steps, buffer 0.235 nm, rlist 1.235 nm
+  inner list: updated every 12 steps, buffer 0.047 nm, rlist 1.047 nm
+
+Using Lorentz-Berthelot Lennard-Jones combination rule
+
+Long Range LJ corr.: <C6> 2.8470e-04
+
+Removing pbc first time
+
+Initializing LINear Constraint Solver
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+B. Hess and H. Bekker and H. J. C. Berendsen and J. G. E. M. Fraaije
+LINCS: A Linear Constraint Solver for molecular simulations
+J. Comp. Chem. 18 (1997) pp. 1463-1472
+-------- -------- --- Thank You --- -------- --------
+
+The number of constraints is 256
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+S. Miyamoto and P. A. Kollman
+SETTLE: An Analytical Version of the SHAKE and RATTLE Algorithms for Rigid
+Water Models
+J. Comp. Chem. 13 (1992) pp. 952-962
+-------- -------- --- Thank You --- -------- --------
+
+
+++++ PLEASE READ AND CITE THE FOLLOWING REFERENCE ++++
+G. Bussi, D. Donadio and M. Parrinello
+Canonical sampling through velocity rescaling
+J. Chem. Phys. 126 (2007) pp. 014101
+-------- -------- --- Thank You --- -------- --------
+
+There are: 27722 Atoms
+
+Constraining the starting coordinates (step 0)
+
+Constraining the coordinates at t0-dt (step 0)
+Center of mass motion removal mode is Linear
+We have the following groups for center of mass motion removal:
+  0:  rest
+RMS relative constraint deviation after constraining: 2.50e-06
+Initial temperature: 298.077 K
+
+Started mdrun on rank 0 Wed Oct 28 23:48:57 2020
+
+           Step           Time
+              0        0.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    8.59525e+01    2.76855e+02    6.13352e+02    1.60389e+01   -1.98425e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.00842e+02    9.30917e+03    5.76787e+04   -3.23720e+03   -4.76574e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.47475e+03    2.53203e-04   -4.09054e+05    6.90619e+04   -3.39992e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39992e+05    2.98265e+02   -1.90336e+02   -3.62865e+03    2.51109e-06
+
+           Step           Time
+            500        1.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.16222e+02    9.66596e+02    7.35064e+02    5.75948e+01   -1.92827e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.03776e+02    9.26130e+03    5.75267e+04   -3.23720e+03   -4.31950e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.45703e+03    1.85686e+02   -3.63271e+05    6.88184e+04   -2.94452e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39454e+05    2.97214e+02   -1.90336e+02   -8.28663e+01    2.13513e-06
+
+           Step           Time
+           1000        2.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.31796e+02    9.63396e+02    7.53210e+02    5.03343e+01   -1.82989e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.23189e+02    9.22186e+03    5.66972e+04   -3.23720e+03   -4.30280e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37033e+03    1.53617e+02   -3.62635e+05    6.93396e+04   -2.93296e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39454e+05    2.99464e+02   -1.90336e+02    3.97759e+01    2.52697e-06
+
+           Step           Time
+           1500        3.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.88265e+02    1.08829e+03    7.21017e+02    5.52280e+01   -1.91477e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94250e+02    9.32090e+03    5.62237e+04   -3.23720e+03   -4.29761e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.44081e+03    1.48096e+02   -3.62309e+05    6.96130e+04   -2.92696e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39450e+05    3.00645e+02   -1.90336e+02   -1.72330e+02    2.66723e-06
+
+           Step           Time
+           2000        4.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.47568e+02    1.04776e+03    7.77124e+02    6.24118e+01   -1.95742e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.83793e+02    9.16494e+03    5.60112e+04   -3.23720e+03   -4.29090e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.41974e+03    1.25477e+02   -3.61983e+05    6.92609e+04   -2.92722e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39452e+05    2.99125e+02   -1.90336e+02   -2.96346e+02    2.20972e-06
+
+           Step           Time
+           2500        5.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.39099e+02    1.03395e+03    7.05032e+02    4.54393e+01   -1.83827e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94528e+02    9.24644e+03    5.60378e+04   -3.23720e+03   -4.29540e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43074e+03    1.17644e+02   -3.62410e+05    6.98886e+04   -2.92522e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39461e+05    3.01835e+02   -1.90336e+02   -1.77875e+02    2.51078e-06
+
+           Step           Time
+           3000        6.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.28259e+02    9.97230e+02    7.42273e+02    6.66618e+01   -1.88013e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.68391e+02    9.23335e+03    5.56344e+04   -3.23720e+03   -4.28600e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.30777e+03    1.61990e+02   -3.61985e+05    6.91838e+04   -2.92801e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39464e+05    2.98791e+02   -1.90336e+02   -1.20530e+02    2.76654e-06
+
+           Step           Time
+           3500        7.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.18290e+02    9.84793e+02    7.59223e+02    8.53089e+01   -2.15016e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.78022e+02    9.31742e+03    5.69780e+04   -3.23720e+03   -4.29622e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42380e+03    1.33550e+02   -3.61496e+05    7.01616e+04   -2.91334e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39458e+05    3.03015e+02   -1.90336e+02    1.54826e+02    2.31469e-06
+
+           Step           Time
+           4000        8.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.48369e+02    1.08151e+03    7.14335e+02    6.08981e+01   -1.92061e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.05401e+02    9.30033e+03    5.61885e+04   -3.23720e+03   -4.28912e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.44151e+03    1.14347e+02   -3.61486e+05    6.98412e+04   -2.91645e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39453e+05    3.01631e+02   -1.90336e+02   -1.53800e+01    2.46439e-06
+
+           Step           Time
+           4500        9.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.01227e+02    1.00384e+03    7.24472e+02    4.89244e+01   -1.98855e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.77278e+02    9.30475e+03    5.52807e+04   -3.23720e+03   -4.27912e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37520e+03    1.57123e+02   -3.61574e+05    6.93036e+04   -2.92271e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39465e+05    2.99309e+02   -1.90336e+02   -3.31686e+02    2.55717e-06
+
+           Step           Time
+           5000       10.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.09840e+02    9.77255e+02    6.96272e+02    5.86043e+01   -2.04764e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.34167e+02    9.26051e+03    5.55740e+04   -3.23720e+03   -4.28699e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43242e+03    1.30795e+02   -3.62068e+05    6.89781e+04   -2.93089e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39443e+05    2.97903e+02   -1.90336e+02   -3.61782e+02    1.98091e-06
+
+           Step           Time
+           5500       11.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.24392e+02    9.93589e+02    7.31526e+02    5.30367e+01   -1.93879e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.83906e+02    9.27906e+03    5.67974e+04   -3.23720e+03   -4.30449e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36178e+03    1.32933e+02   -3.62623e+05    6.93356e+04   -2.93287e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39450e+05    2.99447e+02   -1.90336e+02   -1.45173e+02    2.25912e-06
+
+           Step           Time
+           6000       12.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.76354e+02    1.05589e+03    7.27870e+02    6.37992e+01   -1.99611e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.69413e+02    9.20770e+03    5.54159e+04   -3.23720e+03   -4.29474e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37917e+03    1.55971e+02   -3.62959e+05    6.94666e+04   -2.93492e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39452e+05    3.00013e+02   -1.90336e+02   -4.10077e+02    2.39854e-06
+
+           Step           Time
+           6500       13.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.06934e+02    1.04756e+03    7.56068e+02    5.17028e+01   -1.83911e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.59269e+02    9.19521e+03    5.70606e+04   -3.23720e+03   -4.30662e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42427e+03    1.41958e+02   -3.62540e+05    6.95166e+04   -2.93023e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39449e+05    3.00229e+02   -1.90336e+02   -9.78271e+01    2.76971e-06
+
+           Step           Time
+           7000       14.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.86949e+02    1.07639e+03    7.21098e+02    7.06441e+01   -1.99202e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.11008e+02    9.30251e+03    5.65994e+04   -3.23720e+03   -4.29911e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39022e+03    1.32861e+02   -3.62156e+05    6.99576e+04   -2.92199e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39451e+05    3.02134e+02   -1.90336e+02   -6.44535e+01    2.61933e-06
+
+           Step           Time
+           7500       15.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.06217e+02    9.70865e+02    7.26421e+02    5.29771e+01   -2.02567e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94891e+02    9.30942e+03    5.53107e+04   -3.23720e+03   -4.28889e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.45704e+03    1.26012e+02   -3.62474e+05    6.88192e+04   -2.93655e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39437e+05    2.97217e+02   -1.90336e+02   -2.88645e+02    2.33337e-06
+
+           Step           Time
+           8000       16.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.48881e+02    1.01382e+03    7.23879e+02    4.36005e+01   -1.94168e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.11559e+02    9.20043e+03    5.54281e+04   -3.23720e+03   -4.29516e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40473e+03    1.38881e+02   -3.63134e+05    6.95153e+04   -2.93618e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39446e+05    3.00223e+02   -1.90336e+02   -2.14119e+02    2.67730e-06
+
+           Step           Time
+           8500       17.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.80972e+02    1.07288e+03    6.93976e+02    5.73396e+01   -2.05486e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.04260e+02    9.29536e+03    5.67083e+04   -3.23720e+03   -4.28990e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.47410e+03    1.29840e+02   -3.61115e+05    6.93586e+04   -2.91757e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39438e+05    2.99546e+02   -1.90336e+02   -4.69823e+01    2.24144e-06
+
+           Step           Time
+           9000       18.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.06397e+02    1.00117e+03    7.54796e+02    6.18108e+01   -2.11495e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.06479e+02    9.21794e+03    5.54769e+04   -3.23720e+03   -4.27885e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40334e+03    1.21399e+02   -3.61383e+05    6.94087e+04   -2.91975e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39449e+05    2.99763e+02   -1.90336e+02   -4.08437e+02    2.69722e-06
+
+           Step           Time
+           9500       19.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.59420e+02    1.08647e+03    7.08570e+02    4.68543e+01   -1.98035e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.76262e+02    9.19948e+03    5.72824e+04   -3.23720e+03   -4.30693e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43466e+03    1.20385e+02   -3.62414e+05    6.92950e+04   -2.93119e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39434e+05    2.99272e+02   -1.90336e+02    2.97324e+01    3.09724e-06
+
+           Step           Time
+          10000       20.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.25882e+02    1.04601e+03    7.85383e+02    7.25912e+01   -2.12597e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.99586e+02    9.24436e+03    5.61605e+04   -3.23720e+03   -4.29543e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.44098e+03    1.23745e+02   -3.62194e+05    7.01475e+04   -2.92046e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39445e+05    3.02954e+02   -1.90336e+02   -1.14999e+02    2.25726e-06
+
+           Step           Time
+          10500       21.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.87351e+02    9.99191e+02    7.36138e+02    5.79698e+01   -2.05871e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94402e+02    9.17230e+03    5.58266e+04   -3.23720e+03   -4.29437e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.45309e+03    1.32419e+02   -3.62621e+05    6.91654e+04   -2.93456e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39432e+05    2.98712e+02   -1.90336e+02   -2.08181e+02    2.71940e-06
+
+           Step           Time
+          11000       22.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.28441e+02    9.32421e+02    7.28662e+02    5.67184e+01   -1.85953e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.93775e+02    9.28804e+03    5.58731e+04   -3.23720e+03   -4.29099e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.41326e+03    1.12884e+02   -3.62195e+05    7.01752e+04   -2.92020e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39443e+05    3.03073e+02   -1.90336e+02   -2.11672e+02    2.48912e-06
+
+           Step           Time
+          11500       23.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.74359e+02    1.03090e+03    7.45350e+02    4.53828e+01   -1.94003e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.82995e+02    9.30534e+03    5.59886e+04   -3.23720e+03   -4.28892e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.46477e+03    1.28393e+02   -3.61657e+05    6.95831e+04   -2.92074e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39420e+05    3.00516e+02   -1.90336e+02   -2.66196e+02    2.21215e-06
+
+           Step           Time
+          12000       24.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.97133e+02    9.54936e+02    7.49785e+02    5.30241e+01   -1.94369e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.08802e+02    9.31041e+03    5.53944e+04   -3.23720e+03   -4.29298e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.46529e+03    1.42209e+02   -3.62754e+05    6.92629e+04   -2.93491e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39428e+05    2.99133e+02   -1.90336e+02   -2.96965e+02    2.29492e-06
+
+           Step           Time
+          12500       25.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.77907e+02    1.07044e+03    7.35041e+02    5.63338e+01   -2.09718e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.90737e+02    9.28907e+03    5.62712e+04   -3.23720e+03   -4.29682e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42811e+03    1.39928e+02   -3.62271e+05    6.82381e+04   -2.94032e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39407e+05    2.94707e+02   -1.90336e+02   -8.72055e-01    2.31618e-06
+
+           Step           Time
+          13000       26.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.36372e+02    1.02770e+03    7.56420e+02    6.10904e+01   -1.87729e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.90873e+02    9.17215e+03    5.67033e+04   -3.23720e+03   -4.30207e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43370e+03    1.42378e+02   -3.62408e+05    6.93316e+04   -2.93076e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39420e+05    2.99430e+02   -1.90336e+02   -7.55017e+01    2.64316e-06
+
+           Step           Time
+          13500       27.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.00836e+02    1.05177e+03    7.16319e+02    5.32745e+01   -1.95407e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.59212e+02    9.27770e+03    5.59459e+04   -3.23720e+03   -4.29157e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38651e+03    1.28088e+02   -3.62170e+05    6.86366e+04   -2.93534e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39420e+05    2.96428e+02   -1.90336e+02   -1.58410e+02    2.34591e-06
+
+           Step           Time
+          14000       28.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.20130e+02    1.06001e+03    6.99452e+02    6.62407e+01   -2.08695e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.77261e+02    9.26242e+03    5.57691e+04   -3.23720e+03   -4.28782e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.48451e+03    1.33509e+02   -3.61855e+05    6.88505e+04   -2.93004e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39420e+05    2.97352e+02   -1.90336e+02   -1.44456e+02    2.79868e-06
+
+           Step           Time
+          14500       29.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.67432e+02    1.02988e+03    7.27113e+02    4.60096e+01   -1.94840e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.84604e+02    9.32838e+03    5.54273e+04   -3.23720e+03   -4.28907e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36916e+03    1.24995e+02   -3.62434e+05    6.93381e+04   -2.93096e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39423e+05    2.99458e+02   -1.90336e+02   -2.34817e+02    2.10276e-06
+
+           Step           Time
+          15000       30.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.08970e+02    9.27882e+02    7.60871e+02    5.04084e+01   -1.84704e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.09373e+02    9.23357e+03    5.65736e+04   -3.23720e+03   -4.30181e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42871e+03    1.37829e+02   -3.62572e+05    6.94983e+04   -2.93074e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39421e+05    3.00150e+02   -1.90336e+02   -1.28350e+02    2.47381e-06
+
+           Step           Time
+          15500       31.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.36827e+02    9.99700e+02    7.31952e+02    5.93182e+01   -1.78129e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.29025e+02    9.22893e+03    5.61942e+04   -3.23720e+03   -4.29007e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.35341e+03    1.32088e+02   -3.61757e+05    6.95205e+04   -2.92236e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39411e+05    3.00246e+02   -1.90336e+02   -1.37928e+02    2.70025e-06
+
+           Step           Time
+          16000       32.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.17103e+02    1.00376e+03    7.35279e+02    6.29683e+01   -1.93397e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.72778e+02    9.15021e+03    5.58324e+04   -3.23720e+03   -4.28677e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.32809e+03    1.18932e+02   -3.61986e+05    6.97048e+04   -2.92281e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39415e+05    3.01042e+02   -1.90336e+02   -1.49775e+02    2.67524e-06
+
+           Step           Time
+          16500       33.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.15166e+02    1.03857e+03    7.00023e+02    5.19225e+01   -1.90252e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.86686e+02    9.19540e+03    5.56038e+04   -3.23720e+03   -4.28579e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.34520e+03    1.48623e+02   -3.62021e+05    7.01506e+04   -2.91870e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39420e+05    3.02967e+02   -1.90336e+02   -3.25613e+02    2.24303e-06
+
+           Step           Time
+          17000       34.00000
+
+Writing checkpoint, step 17000 at Thu Oct 29 00:04:00 2020
+
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.15335e+02    1.06896e+03    7.23788e+02    7.01938e+01   -1.91591e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.00818e+02    9.11783e+03    5.57290e+04   -3.23720e+03   -4.28435e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38759e+03    1.17139e+02   -3.61733e+05    6.94515e+04   -2.92281e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39419e+05    2.99948e+02   -1.90336e+02   -7.94764e+01    2.31251e-06
+
+           Step           Time
+          17500       35.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.74235e+02    9.70012e+02    7.31061e+02    6.95075e+01   -2.07856e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.05254e+02    9.27937e+03    5.66954e+04   -3.23720e+03   -4.30904e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.31060e+03    1.17943e+02   -3.63295e+05    6.95386e+04   -2.93757e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39418e+05    3.00324e+02   -1.90336e+02   -1.17046e+02    1.88772e-06
+
+           Step           Time
+          18000       36.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.88439e+02    9.43271e+02    6.96827e+02    5.57757e+01   -1.93253e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.00839e+02    9.32456e+03    5.65348e+04   -3.23720e+03   -4.30074e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40045e+03    1.50565e+02   -3.62509e+05    6.92806e+04   -2.93228e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39410e+05    2.99210e+02   -1.90336e+02   -1.06994e+02    1.89529e-06
+
+           Step           Time
+          18500       37.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.73899e+02    1.02321e+03    7.07286e+02    5.18740e+01   -1.97817e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.07891e+02    9.24449e+03    5.56142e+04   -3.23720e+03   -4.28966e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.33514e+03    1.23921e+02   -3.62319e+05    7.01174e+04   -2.92201e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39408e+05    3.02824e+02   -1.90336e+02   -3.24483e+02    2.34755e-06
+
+           Step           Time
+          19000       38.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.45100e+02    9.90599e+02    7.31336e+02    6.07282e+01   -1.93273e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.02732e+02    9.19518e+03    5.74979e+04   -3.23720e+03   -4.31050e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.31445e+03    1.18628e+02   -3.62624e+05    6.91746e+04   -2.93449e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39401e+05    2.98752e+02   -1.90336e+02   -5.61003e+01    1.91074e-06
+
+           Step           Time
+          19500       39.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.48169e+02    9.59714e+02    7.13135e+02    7.95397e+01   -2.01558e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.07024e+02    9.20339e+03    5.59578e+04   -3.23720e+03   -4.29502e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36604e+03    1.15474e+02   -3.62690e+05    6.93367e+04   -2.93354e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39416e+05    2.99452e+02   -1.90336e+02   -1.39644e+02    3.10310e-06
+
+           Step           Time
+          20000       40.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.32790e+02    1.04549e+03    7.40854e+02    4.87167e+01   -1.89884e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.14726e+02    9.28307e+03    5.70083e+04   -3.23720e+03   -4.31579e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.44511e+03    1.31798e+02   -3.63355e+05    6.96707e+04   -2.93684e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39402e+05    3.00895e+02   -1.90336e+02   -1.00577e+02    2.64231e-06
+
+           Step           Time
+          20500       41.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.60234e+02    1.03625e+03    7.15626e+02    7.23250e+01   -1.92092e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.86923e+02    9.32431e+03    5.70702e+04   -3.23720e+03   -4.30837e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40934e+03    1.11921e+02   -3.62679e+05    6.94102e+04   -2.93269e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39400e+05    2.99769e+02   -1.90336e+02   -1.57213e+02    2.46507e-06
+
+           Step           Time
+          21000       42.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.83579e+02    1.01433e+03    7.21476e+02    4.52144e+01   -2.01793e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.11628e+02    9.17146e+03    5.79631e+04   -3.23720e+03   -4.31269e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42598e+03    1.21060e+02   -3.62350e+05    6.92750e+04   -2.93075e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39392e+05    2.99185e+02   -1.90336e+02    8.83493e+01    2.49840e-06
+
+           Step           Time
+          21500       43.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    5.13546e+02    9.74581e+02    7.32675e+02    5.82506e+01   -2.01039e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.70120e+02    9.31595e+03    5.68871e+04   -3.23720e+03   -4.30198e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43539e+03    1.25086e+02   -3.62124e+05    6.92718e+04   -2.92852e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39387e+05    2.99172e+02   -1.90336e+02   -1.21918e+02    2.17988e-06
+
+           Step           Time
+          22000       44.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.04268e+02    1.06497e+03    6.86479e+02    5.46736e+01   -1.74864e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.93355e+02    9.15485e+03    5.64198e+04   -3.23720e+03   -4.29932e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43084e+03    1.50951e+02   -3.62484e+05    6.89137e+04   -2.93570e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39394e+05    2.97625e+02   -1.90336e+02   -1.60938e+02    2.59340e-06
+
+           Step           Time
+          22500       45.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.10831e+02    1.14303e+03    7.37994e+02    5.87690e+01   -1.78182e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.73600e+02    9.11699e+03    5.64925e+04   -3.23720e+03   -4.29851e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36691e+03    1.08829e+02   -3.62356e+05    7.00296e+04   -2.92327e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39403e+05    3.02445e+02   -1.90336e+02   -1.42716e+02    3.16621e-06
+
+           Step           Time
+          23000       46.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.33030e+02    1.05773e+03    7.48875e+02    5.19381e+01   -1.92540e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.85861e+02    9.28067e+03    5.62443e+04   -3.23720e+03   -4.29337e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.30938e+03    1.20718e+02   -3.62034e+05    7.04803e+04   -2.91554e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39391e+05    3.04391e+02   -1.90336e+02   -1.93087e+02    2.52997e-06
+
+           Step           Time
+          23500       47.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.07516e+02    1.00489e+03    7.70827e+02    6.51564e+01   -1.88782e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.19678e+02    9.20035e+03    5.63080e+04   -3.23720e+03   -4.29442e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38837e+03    1.22945e+02   -3.62080e+05    6.93662e+04   -2.92714e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39380e+05    2.99579e+02   -1.90336e+02   -1.17949e+02    1.96386e-06
+
+           Step           Time
+          24000       48.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.86237e+02    1.04220e+03    7.16658e+02    7.25137e+01   -1.90535e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.04604e+02    9.19817e+03    5.54223e+04   -3.23720e+03   -4.28322e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38245e+03    1.13706e+02   -3.61911e+05    6.92900e+04   -2.92621e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39390e+05    2.99250e+02   -1.90336e+02   -2.04777e+02    2.51803e-06
+
+           Step           Time
+          24500       49.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.98240e+02    9.98538e+02    7.44869e+02    4.99383e+01   -2.08934e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.15651e+02    9.22938e+03    5.65123e+04   -3.23720e+03   -4.29345e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36240e+03    1.25785e+02   -3.61854e+05    6.94596e+04   -2.92394e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39384e+05    2.99983e+02   -1.90336e+02   -2.82413e+01    2.41745e-06
+
+Writing checkpoint, step 24600 at Thu Oct 29 00:18:58 2020
+
+
+           Step           Time
+          25000       50.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.97936e+02    1.00147e+03    7.38787e+02    5.61660e+01   -1.98400e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.80513e+02    9.25239e+03    5.64824e+04   -3.23720e+03   -4.30330e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.41554e+03    1.62059e+02   -3.62678e+05    6.97159e+04   -2.92962e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39364e+05    3.01090e+02   -1.90336e+02   -2.22231e+02    2.63116e-06
+
+           Step           Time
+          25500       51.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.92309e+02    1.05224e+03    7.46065e+02    7.23508e+01   -2.07627e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.79101e+02    9.19275e+03    5.60461e+04   -3.23720e+03   -4.28590e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42740e+03    1.36309e+02   -3.61490e+05    6.92438e+04   -2.92246e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39379e+05    2.99051e+02   -1.90336e+02   -1.87204e+02    2.30458e-06
+
+           Step           Time
+          26000       52.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.25493e+02    1.06748e+03    7.50757e+02    6.08417e+01   -1.94116e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.71900e+02    9.30208e+03    5.62626e+04   -3.23720e+03   -4.29499e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43056e+03    1.45832e+02   -3.62013e+05    7.00257e+04   -2.91988e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39372e+05    3.02428e+02   -1.90336e+02   -6.74339e+00    2.21845e-06
+
+           Step           Time
+          26500       53.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.66371e+02    9.78478e+02    7.05091e+02    5.43177e+01   -1.88018e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.68659e+02    9.23420e+03    5.67576e+04   -3.23720e+03   -4.30611e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.46585e+03    1.45427e+02   -3.62860e+05    6.92149e+04   -2.93645e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39372e+05    2.98926e+02   -1.90336e+02   -8.93737e+01    2.46205e-06
+
+           Step           Time
+          27000       54.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.42431e+02    9.93040e+02    7.47625e+02    6.12404e+01   -2.01343e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.51925e+02    9.17673e+03    5.57271e+04   -3.23720e+03   -4.28656e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37102e+03    1.17362e+02   -3.62006e+05    6.91203e+04   -2.92886e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39381e+05    2.98517e+02   -1.90336e+02   -4.02241e+02    2.66356e-06
+
+           Step           Time
+          27500       55.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.16747e+02    1.04673e+03    7.33774e+02    5.60727e+01   -1.99455e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.87599e+02    9.26840e+03    5.62478e+04   -3.23720e+03   -4.29514e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.41888e+03    1.41293e+02   -3.62133e+05    6.92769e+04   -2.92856e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39361e+05    2.99194e+02   -1.90336e+02   -1.56641e+02    2.48662e-06
+
+           Step           Time
+          28000       56.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.56136e+02    1.03120e+03    7.20036e+02    6.02874e+01   -1.79259e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.95342e+02    9.27036e+03    5.58226e+04   -3.23720e+03   -4.29519e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42235e+03    1.20873e+02   -3.62636e+05    6.99469e+04   -2.92689e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39369e+05    3.02087e+02   -1.90336e+02   -2.03555e+02    2.46569e-06
+
+           Step           Time
+          28500       57.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.57077e+02    1.08381e+03    7.37200e+02    4.53494e+01   -1.96078e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.06192e+02    9.17642e+03    5.62335e+04   -3.23720e+03   -4.29568e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.45783e+03    1.34991e+02   -3.62169e+05    7.03428e+04   -2.91826e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39366e+05    3.03797e+02   -1.90336e+02   -2.19156e+02    2.69886e-06
+
+           Step           Time
+          29000       58.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.66090e+02    1.01164e+03    7.10131e+02    4.74685e+01   -2.03232e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.08900e+02    9.24374e+03    5.64443e+04   -3.23720e+03   -4.29844e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43806e+03    1.32748e+02   -3.62382e+05    6.95792e+04   -2.92803e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39378e+05    3.00499e+02   -1.90336e+02    1.15896e+02    2.83691e-06
+
+           Step           Time
+          29500       59.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.96165e+02    1.11665e+03    7.28419e+02    3.67944e+01   -1.95505e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.88639e+02    9.15781e+03    5.64143e+04   -3.23720e+03   -4.30401e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.33769e+03    1.45173e+02   -3.63012e+05    6.95705e+04   -2.93441e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39355e+05    3.00462e+02   -1.90336e+02   -6.22587e+01    2.82237e-06
+
+           Step           Time
+          30000       60.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.86466e+02    1.04449e+03    7.45268e+02    5.28854e+01   -2.19595e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.86447e+02    9.25657e+03    5.72200e+04   -3.23720e+03   -4.30509e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39062e+03    1.08731e+02   -3.62275e+05    6.85250e+04   -2.93750e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39350e+05    2.95947e+02   -1.90336e+02   -1.04271e+01    2.46846e-06
+
+           Step           Time
+          30500       61.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.31481e+02    1.05378e+03    7.13046e+02    7.53837e+01   -2.11841e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.76871e+02    9.14169e+03    5.56995e+04   -3.23720e+03   -4.28670e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.35198e+03    1.29722e+02   -3.62046e+05    6.94600e+04   -2.92586e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39364e+05    2.99984e+02   -1.90336e+02   -3.85171e+02    2.35204e-06
+
+           Step           Time
+          31000       62.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.26456e+02    1.01895e+03    7.42450e+02    6.09247e+01   -2.31239e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.10108e+02    9.28198e+03    5.58743e+04   -3.23720e+03   -4.28808e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39345e+03    1.33686e+02   -3.61834e+05    6.98646e+04   -2.91970e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39359e+05    3.01732e+02   -1.90336e+02   -1.65216e+02    2.19990e-06
+
+           Step           Time
+          31500       63.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.98940e+02    1.05755e+03    7.17129e+02    5.35292e+01   -1.98310e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94988e+02    9.23737e+03    5.78922e+04   -3.23720e+03   -4.31367e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.41198e+03    1.29337e+02   -3.62409e+05    6.94837e+04   -2.92926e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39361e+05    3.00087e+02   -1.90336e+02    2.29087e+02    2.39603e-06
+
+           Step           Time
+          32000       64.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.03570e+02    1.01918e+03    7.09895e+02    5.69572e+01   -1.75487e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94004e+02    9.23919e+03    5.65766e+04   -3.23720e+03   -4.30303e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42217e+03    1.10493e+02   -3.62684e+05    6.98262e+04   -2.92857e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39374e+05    3.01566e+02   -1.90336e+02    1.78875e+01    2.64289e-06
+
+           Step           Time
+          32500       65.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.61994e+02    1.03372e+03    7.49156e+02    6.04347e+01   -2.10785e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.67977e+02    9.28983e+03    5.60999e+04   -3.23720e+03   -4.28618e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.49131e+03    1.21005e+02   -3.61290e+05    6.96094e+04   -2.91681e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39348e+05    3.00630e+02   -1.90336e+02   -2.23910e+02    2.99857e-06
+
+           Step           Time
+          33000       66.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.39610e+02    1.02602e+03    7.64406e+02    5.85742e+01   -1.96997e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.16419e+02    9.17678e+03    5.53754e+04   -3.23720e+03   -4.28422e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42050e+03    1.40308e+02   -3.61938e+05    6.91268e+04   -2.92811e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39335e+05    2.98545e+02   -1.90336e+02   -3.30224e+02    2.94486e-06
+
+           Step           Time
+          33500       67.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.48063e+02    1.00121e+03    6.91924e+02    5.19687e+01   -1.84366e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.08982e+02    9.36099e+03    5.66966e+04   -3.23720e+03   -4.30498e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.33348e+03    1.09490e+02   -3.62817e+05    6.85176e+04   -2.94300e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39354e+05    2.95914e+02   -1.90336e+02   -5.84931e+01    2.68541e-06
+
+           Step           Time
+          34000       68.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.72091e+02    9.64816e+02    7.44549e+02    5.77335e+01   -2.01189e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.96449e+02    9.17616e+03    5.65563e+04   -3.23720e+03   -4.30146e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.32988e+03    9.47657e+01   -3.62792e+05    6.82900e+04   -2.94502e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39353e+05    2.94932e+02   -1.90336e+02   -2.06782e+01    2.59770e-06
+
+           Step           Time
+          34500       69.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.97490e+02    1.03671e+03    6.83392e+02    3.66774e+01   -1.64374e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.01154e+02    9.27741e+03    5.58227e+04   -3.23720e+03   -4.29155e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39319e+03    1.27024e+02   -3.62281e+05    6.94449e+04   -2.92836e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39336e+05    2.99919e+02   -1.90336e+02   -9.42032e+01    2.96356e-06
+
+           Step           Time
+          35000       70.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.66560e+02    1.01981e+03    7.26958e+02    6.94806e+01   -2.00520e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.23257e+02    9.26455e+03    5.59467e+04   -3.23720e+03   -4.28661e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.34348e+03    1.23401e+02   -3.61715e+05    6.90436e+04   -2.92671e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39342e+05    2.98186e+02   -1.90336e+02   -1.08273e+02    2.17121e-06
+
+           Step           Time
+          35500       71.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.30913e+02    9.81762e+02    7.54698e+02    5.03253e+01   -1.89596e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.58828e+02    9.32525e+03    5.62986e+04   -3.23720e+03   -4.29642e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38657e+03    1.23755e+02   -3.62258e+05    6.95701e+04   -2.92688e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39346e+05    3.00460e+02   -1.90336e+02   -3.07059e+02    2.56483e-06
+
+           Step           Time
+          36000       72.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.07837e+02    9.44327e+02    7.58553e+02    5.28240e+01   -1.96421e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.10544e+02    9.19298e+03    5.55952e+04   -3.23720e+03   -4.29347e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.28990e+03    1.22893e+02   -3.62905e+05    6.90943e+04   -2.93811e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39343e+05    2.98405e+02   -1.90336e+02   -1.41661e+02    2.50900e-06
+
+           Step           Time
+          36500       73.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.34705e+02    1.00646e+03    7.26846e+02    5.93677e+01   -1.89269e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.74157e+02    9.31675e+03    5.45311e+04   -3.23720e+03   -4.27520e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37253e+03    1.35055e+02   -3.61889e+05    6.95537e+04   -2.92336e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39344e+05    3.00389e+02   -1.90336e+02   -4.38806e+02    2.29354e-06
+
+           Step           Time
+          37000       74.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.98136e+02    9.21251e+02    6.99801e+02    4.11540e+01   -1.92877e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.48815e+02    9.36438e+03    5.62506e+04   -3.23720e+03   -4.30329e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40078e+03    1.33396e+02   -3.63101e+05    6.97669e+04   -2.93334e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39342e+05    3.01310e+02   -1.90336e+02   -1.58105e+02    2.76622e-06
+
+           Step           Time
+          37500       75.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.48201e+02    1.03719e+03    7.07291e+02    4.50621e+01   -1.87133e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.08540e+02    9.33921e+03    5.66383e+04   -3.23720e+03   -4.30594e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37338e+03    1.11915e+02   -3.62809e+05    6.91541e+04   -2.93655e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39321e+05    2.98663e+02   -1.90336e+02   -1.60385e+02    2.47582e-06
+
+           Step           Time
+          38000       76.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.80192e+02    1.01997e+03    7.34094e+02    5.60884e+01   -1.82656e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.20486e+02    9.29967e+03    5.59217e+04   -3.23720e+03   -4.28636e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.35560e+03    1.32432e+02   -3.61635e+05    6.97182e+04   -2.91917e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39334e+05    3.01100e+02   -1.90336e+02    1.94383e+01    2.45799e-06
+
+           Step           Time
+          38500       77.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.15599e+02    1.03230e+03    7.48248e+02    7.01953e+01   -1.86298e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.81612e+02    9.19220e+03    5.50560e+04   -3.23720e+03   -4.27983e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39954e+03    1.23562e+02   -3.61887e+05    6.93644e+04   -2.92522e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39321e+05    2.99572e+02   -1.90336e+02   -2.30171e+02    3.19340e-06
+
+           Step           Time
+          39000       78.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.93396e+02    1.10720e+03    7.18350e+02    4.99794e+01   -2.00683e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.78869e+02    9.22378e+03    5.67611e+04   -3.23720e+03   -4.30559e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.43009e+03    1.14517e+02   -3.62720e+05    7.01629e+04   -2.92557e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39321e+05    3.03020e+02   -1.90336e+02   -1.90753e+01    2.69055e-06
+
+           Step           Time
+          39500       79.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.83358e+02    1.03164e+03    7.27489e+02    5.39268e+01   -1.98436e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.08857e+02    9.11100e+03    5.56106e+04   -3.23720e+03   -4.28773e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37061e+03    1.28015e+02   -3.62183e+05    7.00588e+04   -2.92124e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39322e+05    3.02570e+02   -1.90336e+02   -3.32892e+02    2.73781e-06
+
+           Step           Time
+          40000       80.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.41986e+02    1.07298e+03    7.32777e+02    5.70902e+01   -2.03161e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.90834e+02    9.31260e+03    5.56567e+04   -3.23720e+03   -4.29697e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42288e+03    1.15788e+02   -3.62834e+05    6.95684e+04   -2.93266e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39315e+05    3.00453e+02   -1.90336e+02   -2.63416e+02    2.25829e-06
+
+           Step           Time
+          40500       81.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.83613e+02    9.85170e+02    7.51577e+02    5.70168e+01   -1.61711e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.05017e+02    9.30547e+03    5.75873e+04   -3.23720e+03   -4.31645e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39915e+03    1.35452e+02   -3.62934e+05    7.05901e+04   -2.92344e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39312e+05    3.04865e+02   -1.90336e+02    1.20344e+02    3.63527e-06
+
+           Step           Time
+          41000       82.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.94310e+02    1.04045e+03    7.22080e+02    5.84156e+01   -1.98834e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.57909e+02    9.15594e+03    5.61688e+04   -3.23720e+03   -4.30139e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.24371e+03    1.09917e+02   -3.63223e+05    6.85576e+04   -2.94666e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39324e+05    2.96087e+02   -1.90336e+02   -3.06940e+02    1.95810e-06
+
+Writing checkpoint, step 41350 at Thu Oct 29 00:33:58 2020
+
+
+           Step           Time
+          41500       83.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.56458e+02    9.96869e+02    7.23820e+02    5.38917e+01   -1.96272e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.70302e+02    9.24336e+03    5.64416e+04   -3.23720e+03   -4.30328e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.36863e+03    1.49946e+02   -3.62856e+05    6.90151e+04   -2.93841e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39308e+05    2.98063e+02   -1.90336e+02   -6.18021e+01    2.62751e-06
+
+           Step           Time
+          42000       84.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.04554e+02    1.03500e+03    7.09870e+02    7.83484e+01   -1.98770e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.87947e+02    9.24231e+03    5.62352e+04   -3.23720e+03   -4.29474e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.34671e+03    1.29496e+02   -3.62240e+05    7.00531e+04   -2.92187e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39301e+05    3.02546e+02   -1.90336e+02   -2.53399e+02    2.54092e-06
+
+           Step           Time
+          42500       85.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.13351e+02    9.93164e+02    7.32854e+02    5.68978e+01   -2.01617e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94217e+02    9.31392e+03    5.54218e+04   -3.23720e+03   -4.28502e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37055e+03    1.15446e+02   -3.62029e+05    6.88409e+04   -2.93188e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39304e+05    2.97311e+02   -1.90336e+02   -2.77294e+02    2.61650e-06
+
+           Step           Time
+          43000       86.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.60935e+02    9.57053e+02    7.70703e+02    5.69910e+01   -2.02793e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.94249e+02    9.28308e+03    5.59140e+04   -3.23720e+03   -4.29451e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38480e+03    1.21392e+02   -3.62547e+05    6.91744e+04   -2.93373e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39303e+05    2.98751e+02   -1.90336e+02   -2.61322e+02    2.82208e-06
+
+           Step           Time
+          43500       87.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.18944e+02    9.63091e+02    7.29501e+02    6.60138e+01   -1.99050e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.03510e+02    9.24986e+03    5.62212e+04   -3.23720e+03   -4.29409e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39350e+03    1.14498e+02   -3.62185e+05    6.84129e+04   -2.93772e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39292e+05    2.95462e+02   -1.90336e+02   -3.63254e+01    2.74817e-06
+
+           Step           Time
+          44000       88.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.27570e+02    1.04893e+03    7.34087e+02    7.65725e+01   -1.80840e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.71945e+02    9.16208e+03    5.60007e+04   -3.23720e+03   -4.28939e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39861e+03    1.26791e+02   -3.61910e+05    7.01827e+04   -2.91727e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39302e+05    3.03106e+02   -1.90336e+02   -6.53464e+01    2.38129e-06
+
+           Step           Time
+          44500       89.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.40627e+02    9.85722e+02    7.11335e+02    6.21859e+01   -1.98881e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.55190e+02    9.27738e+03    5.59260e+04   -3.23720e+03   -4.29596e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37482e+03    1.36250e+02   -3.62663e+05    6.90667e+04   -2.93596e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39296e+05    2.98286e+02   -1.90336e+02   -2.19458e+02    2.27143e-06
+
+           Step           Time
+          45000       90.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.00998e+02    1.00312e+03    6.79481e+02    5.86843e+01   -2.01923e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.83071e+02    9.35367e+03    5.48984e+04   -3.23720e+03   -4.28949e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.37168e+03    1.44381e+02   -3.62995e+05    6.89015e+04   -2.94093e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39292e+05    2.97573e+02   -1.90336e+02   -3.76037e+02    2.22154e-06
+
+           Step           Time
+          45500       91.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.14449e+02    1.00851e+03    6.86607e+02    5.88489e+01   -1.74649e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.82934e+02    9.24155e+03    5.66533e+04   -3.23720e+03   -4.30840e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.47658e+03    9.78141e+01   -3.63131e+05    6.99070e+04   -2.93224e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39291e+05    3.01915e+02   -1.90336e+02   -1.72934e+02    2.06336e-06
+
+           Step           Time
+          46000       92.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.06248e+02    1.11195e+03    7.22501e+02    6.96332e+01   -1.89048e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.79816e+02    9.17701e+03    5.62248e+04   -3.23720e+03   -4.29702e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40888e+03    1.38940e+02   -3.62388e+05    6.91676e+04   -2.93221e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39276e+05    2.98721e+02   -1.90336e+02   -2.50004e+02    2.25318e-06
+
+           Step           Time
+          46500       93.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.59506e+02    1.07610e+03    6.96448e+02    5.74561e+01   -1.93257e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.95718e+02    9.28262e+03    5.76724e+04   -3.23720e+03   -4.31414e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40762e+03    1.29985e+02   -3.62667e+05    6.93596e+04   -2.93307e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39273e+05    2.99551e+02   -1.90336e+02    2.25623e+02    2.18655e-06
+
+           Step           Time
+          47000       94.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.20436e+02    1.00792e+03    7.15782e+02    6.52829e+01   -2.01033e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.83846e+02    9.26857e+03    5.64514e+04   -3.23720e+03   -4.30100e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.42250e+03    1.17872e+02   -3.62584e+05    6.94926e+04   -2.93092e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39283e+05    3.00125e+02   -1.90336e+02   -1.49861e+02    2.04054e-06
+
+           Step           Time
+          47500       95.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.32026e+02    1.04316e+03    7.44852e+02    5.82304e+01   -2.16748e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.63527e+02    9.24884e+03    5.66155e+04   -3.23720e+03   -4.29542e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38619e+03    1.06973e+02   -3.61897e+05    6.91082e+04   -2.92788e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39268e+05    2.98465e+02   -1.90336e+02   -2.93301e+01    3.00542e-06
+
+           Step           Time
+          48000       96.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.07339e+02    1.01165e+03    7.05155e+02    6.99131e+01   -1.98737e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.69571e+02    9.12045e+03    5.57355e+04   -3.23720e+03   -4.30234e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.38182e+03    1.30656e+02   -3.63637e+05    6.89795e+04   -2.94658e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39281e+05    2.97909e+02   -1.90336e+02   -4.72370e+02    2.79191e-06
+
+           Step           Time
+          48500       97.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.61216e+02    9.78312e+02    6.91867e+02    8.36674e+01   -2.01919e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.84138e+02    9.27297e+03    5.68317e+04   -3.23720e+03   -4.29914e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.46738e+03    1.20119e+02   -3.62062e+05    6.86480e+04   -2.93414e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39274e+05    2.96477e+02   -1.90336e+02    2.43349e+02    2.37259e-06
+
+           Step           Time
+          49000       98.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.75648e+02    9.81749e+02    6.89278e+02    5.25203e+01   -1.96885e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.70700e+02    9.12865e+03    5.61447e+04   -3.23720e+03   -4.29892e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.29903e+03    1.55643e+02   -3.62928e+05    6.85544e+04   -2.94373e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39268e+05    2.96073e+02   -1.90336e+02    7.02977e+00    2.99581e-06
+
+           Step           Time
+          49500       99.00000
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.32645e+02    1.01816e+03    6.94680e+02    4.73990e+01   -2.01082e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.82537e+02    9.28920e+03    5.63478e+04   -3.23720e+03   -4.30690e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.40854e+03    1.20088e+02   -3.63287e+05    6.99357e+04   -2.93351e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39273e+05    3.02039e+02   -1.90336e+02   -2.11988e+02    2.84145e-06
+
+           Step           Time
+          50000      100.00000
+
+Writing checkpoint, step 50000 at Thu Oct 29 00:41:33 2020
+
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    3.80558e+02    1.00089e+03    7.17951e+02    6.44799e+01   -1.97871e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    5.11956e+02    9.24576e+03    5.59059e+04   -3.23720e+03   -4.28912e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.35109e+03    1.59240e+02   -3.62010e+05    6.97599e+04   -2.92250e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39274e+05    3.01279e+02   -1.90336e+02   -1.13123e+02    2.48781e-06
+
+
+	<======  ###############  ==>
+	<====  A V E R A G E S  ====>
+	<==  ###############  ======>
+
+	Statistics over 50001 steps using 501 frames
+
+   Energies (kJ/mol)
+           Bond            U-B    Proper Dih.  Improper Dih.      CMAP Dih.
+    4.08715e+02    1.02012e+03    7.26822e+02    5.81240e+01   -1.97686e+02
+          LJ-14     Coulomb-14        LJ (SR)  Disper. corr.   Coulomb (SR)
+    4.89799e+02    9.25137e+03    5.62481e+04   -3.23720e+03   -4.29763e+05
+   Coul. recip. Position Rest.      Potential    Kinetic En.   Total Energy
+    2.39926e+03    1.32653e+02   -3.62463e+05    6.93762e+04   -2.93087e+05
+  Conserved En.    Temperature Pres. DC (bar) Pressure (bar)   Constr. rmsd
+   -3.39377e+05    2.99622e+02   -1.90336e+02   -1.53714e+02    0.00000e+00
+
+   Total Virial (kJ/mol)
+    2.43615e+04   -2.87912e+01    1.06920e+02
+   -2.81802e+01    2.45824e+04   -1.60845e+02
+    1.07935e+02   -1.61116e+02    2.43585e+04
+
+   Pressure (bar)
+   -1.41313e+02    4.72224e+00   -1.31597e+01
+    4.65049e+00   -1.73888e+02    1.65027e+01
+   -1.32789e+01    1.65346e+01   -1.45941e+02
+
+      T-Protein  T-non-Protein
+    2.99563e+02    2.99624e+02
+
+
+	M E G A - F L O P S   A C C O U N T I N G
+
+ NB=Group-cutoff nonbonded kernels    NxN=N-by-N cluster Verlet kernels
+ RF=Reaction-Field  VdW=Van der Waals  QSTab=quadratic-spline table
+ W3=SPC/TIP3p  W4=TIP4p (single or pairs)
+ V&F=Potential and force  V=Potential only  F=Force only
+
+ Computing:                               M-Number         M-Flops  % Flops
+-----------------------------------------------------------------------------
+ Pair Search distance check            9070.068088       81630.613     0.3
+ NxN QSTab Elec. + LJ [F]            345355.098800    14159559.051    51.1
+ NxN QSTab Elec. + LJ [V&F]            3495.511400      206235.173     0.7
+ NxN QSTab Elec. [F]                 326646.177312    11105970.029    40.1
+ NxN QSTab Elec. [V&F]                 3305.844584      135539.628     0.5
+ 1,4 nonbonded interactions              66.001320        5940.119     0.0
+ Calc Weights                          4158.383166      149701.794     0.5
+ Spread Q Bspline                     88712.174208      177424.348     0.6
+ Gather F Bspline                     88712.174208      532273.045     1.9
+ 3D-FFT                              119854.197036      958833.576     3.5
+ Solve PME                               88.201764        5644.913     0.0
+ Shift-X                                 27.749722         166.498     0.0
+ Bonds                                   13.000260         767.015     0.0
+ Propers                                 55.301106       12663.953     0.0
+ Impropers                                3.700074         769.615     0.0
+ Pos. Restr.                             12.800256         640.013     0.0
+ Virial                                  13.911267         250.403     0.0
+ Stop-CM                                 13.916444         139.164     0.0
+ Calc-Ekin                              277.275444        7486.437     0.0
+ Lincs                                   12.800768         768.046     0.0
+ Lincs-Mat                               68.404104         273.616     0.0
+ Constraint-V                          1386.155444       11089.244     0.0
+ Constraint-Vir                          13.760466         330.251     0.0
+ Settle                                 453.527210      146489.289     0.5
+ CMAP                                     1.500030        2550.051     0.0
+ Urey-Bradley                            46.000920        8418.168     0.0
+-----------------------------------------------------------------------------
+ Total                                                27711554.053   100.0
+-----------------------------------------------------------------------------
+
+
+     R E A L   C Y C L E   A N D   T I M E   A C C O U N T I N G
+
+On 1 MPI rank, each using 4 OpenMP threads
+
+ Computing:          Num   Num      Call    Wall time         Giga-Cycles
+                     Ranks Threads  Count      (s)         total sum    %
+-----------------------------------------------------------------------------
+ Neighbor search        1    4       1001      32.693        209.237   1.0
+ Force                  1    4      50001    2267.142      14509.705  71.8
+ PME mesh               1    4      50001     553.220       3540.608  17.5
+ NB X/F buffer ops.     1    4      99001     148.406        949.798   4.7
+ Write traj.            1    4        103       2.693         17.234   0.1
+ Update                 1    4      50001      66.643        426.514   2.1
+ Constraints            1    4      50003      74.533        477.008   2.4
+ Rest                                          10.675         68.318   0.3
+-----------------------------------------------------------------------------
+ Total                                       3156.004      20198.422 100.0
+-----------------------------------------------------------------------------
+ Breakdown of PME mesh computation
+-----------------------------------------------------------------------------
+ PME spread             1    4      50001     202.317       1294.830   6.4
+ PME gather             1    4      50001     210.388       1346.483   6.7
+ PME 3D-FFT             1    4     100002     114.504        732.825   3.6
+ PME solve Elec         1    4      50001      10.758         68.853   0.3
+-----------------------------------------------------------------------------
+
+               Core t (s)   Wall t (s)        (%)
+       Time:    12624.014     3156.004      400.0
+                         52:36
+                 (ns/day)    (hour/ns)
+Performance:        2.738        8.767
+Finished mdrun on rank 0 Thu Oct 29 00:41:33 2020
+

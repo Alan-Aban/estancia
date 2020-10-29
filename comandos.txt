@@ -1,0 +1,49 @@
+
+# source /usr/local/gromacs/bin/GMXRC
+
+# grep -v HOH nombre.pdb > nom_clean.pdb
+
+
+; generar el archivo .gro, campo de fuerza Charmm27 (8)
+# gmx pdb2gmx -f dab.pdb -o dab_proc.gro -water tip3p -ignh
+
+# gmx editconf -f dab_proc.gro -o dab_newbox.gro -c -d 1.7 -bt cubic
+
+# gmx solvate -cp dab_newbox.gro -cs spc216.gro -o dab_solv.gro -p topol.top
+
+# gmx grompp -f ions.mdp -c dab_solv.gro -p topol.top -o ions.tpr
+
+; group 13 sol
+# gmx genion -s ions.tpr -o dab_solv_ions.gro -p topol.top -pname NA -nname CL -neutral
+
+# gmx grompp -f minim.mdp -c dab_solv_ions.gro -p topol.top -o em.tpr
+
+# gmx mdrun -v -deffnm em
+
+; 10 0 opcional
+# gmx energy -f em.edr -o potential.xvg
+
+# gmx grompp -f nvt.mdp -c em.gro -r em.gro -p topol.top -o nvt.tpr
+
+; ~2 h 21:39 h - 22:25 h = 46 min, dab-52:36 min,
+# gmx mdrun -v -deffnm nvt
+
+; 16 0 opcional
+# gmx energy -f nvt.edr -o temperature.xvg
+
+# gmx grompp -f npt.mdp -c nvt.gro -r nvt.gro -t nvt.cpt -p topol.top -o npt.tpr
+
+; ~2-3 h 22:52 h - 23:31 h = 39 min
+# gmx mdrun -v -deffnm npt
+
+;18 0 opcional
+# gmx energy -f npt.edr -o pressure.xvg
+
+; 24 0 opcional
+# gmx energy -f npt.edr -o density.xvg
+
+; producción
+gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_1.tpr
+
+; ~6 h 
+gmx mdrun -v -deffnm md_0_1
