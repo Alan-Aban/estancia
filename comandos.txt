@@ -43,7 +43,7 @@
 # gmx energy -f npt.edr -o density.xvg
 
 ; producción
-gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_1.tpr
+gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_3.tpr
 
-; ~6 h 
-gmx mdrun -v -deffnm md_0_1
+; ~6 h |15:45-21:57-->6h21min | |22:57-| |-|
+gmx mdrun -v -deffnm md_0_3

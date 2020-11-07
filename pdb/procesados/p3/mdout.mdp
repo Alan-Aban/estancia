@@ -2,7 +2,7 @@
 ;	File 'mdout.mdp' was generated
 ;	By user: alan (1000)
 ;	On host: alan-80t7
-;	At date: Thu Oct 29 01:24:28 2020
+;	At date: Wed Nov  4 02:02:42 2020
 ;
 ;	Created by:
 ;	                     :-) GROMACS - gmx grompp, 2020.3 (-:
@@ -11,7 +11,7 @@
 ;	Data prefix:  /usr/local/gromacs
 ;	Working dir:  /home/alan/Documentos/estancia/pdb/procesados/p3
 ;	Command line:
-;	  gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_1.tpr
+;	  gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_2.tpr
 
 ; VARIOUS PREPROCESSING OPTIONS
 ; Preprocessor information: use cpp syntax.
