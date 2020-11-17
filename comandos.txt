@@ -3,7 +3,6 @@
 
 # grep -v HOH nombre.pdb > nombre_clean.pdb
 
-
 ; generar el archivo .gro, campo de fuerza Charmm27 (8)
 # gmx pdb2gmx -f nombre.pdb -o nombre_proc.gro -water tip3p -ignh
 
@@ -47,3 +46,19 @@ gmx grompp -f md.mdp -c npt.gro -t npt.cpt -p topol.top -o md_0_3.tpr
 
 ; ~6 h |15:45-21:57-->6h21min | |22:57-| |-|
 gmx mdrun -v -deffnm md_0_3
+
+; gyrate 
+gmx gyrate -s md_0_3.tpr -f md_0_3_noPBC.xtc -o gyrate_3.xvg
+
+; do_dssp
+gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~xmgrace~~~~~~~~~~~~~~~~~~~~~~~~~~~
+xmgrace potential.xvg
+xmgrace density.xvg
+xmgrace pressure.xvg
+xmgrace temperature.xvg
+xmgrace gyrate_1.xvg
+xmgrace gyrate_2.xvg
+xmgrace gyrate_3.xvg
+
