@@ -51,7 +51,9 @@ gmx mdrun -v -deffnm md_0_3
 gmx gyrate -s md_0_3.tpr -f md_0_3_noPBC.xtc -o gyrate_3.xvg
 
 ; do_dssp
-gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm
+gmx do_dssp -s md_0_1.tpr -f md_0_1_noPBC.xtc -o dodssp_1.xpm -sc dodssp_1.xvg
+gmx do_dssp -s md_0_2.tpr -f md_0_2_noPBC.xtc -o dodssp_2.xpm -sc dodssp_2.xvg
+gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm -sc dodssp_3.xvg
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~xmgrace~~~~~~~~~~~~~~~~~~~~~~~~~~~
 xmgrace potential.xvg
@@ -61,4 +63,6 @@ xmgrace temperature.xvg
 xmgrace gyrate_1.xvg
 xmgrace gyrate_2.xvg
 xmgrace gyrate_3.xvg
-
+xmgrace dodssp_1.xvg
+xmgrace dodssp_2.xvg
+xmgrace dodssp_3.xvg
