@@ -1,4 +1,4 @@
-# This file was created Wed Nov 18 16:02:48 2020
+# This file was created Wed Nov 18 19:19:36 2020
 # Created by:
 #                     :-) GROMACS - gmx do_dssp, 2020.3 (-:
 # 
@@ -6,10 +6,10 @@
 # Data prefix:  /usr/local/gromacs
 # Working dir:  /home/alan/Documentos/proyectos git/estancia/pdb/procesados/ab
 # Command line:
-#   gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm
+#   gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm -a test.xpm
 # gmx do_dssp is part of G R O M A C S:
 #
-# Glycine aRginine prOline Methionine Alanine Cystine Serine
+# Giant Rising Ordinary Mutants for A Clerical Setup
 #
 @    title "Secondary Structure"
 @    xaxis  label "Time (ps)"

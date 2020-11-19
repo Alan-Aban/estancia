@@ -53,7 +53,7 @@ gmx gyrate -s md_0_3.tpr -f md_0_3_noPBC.xtc -o gyrate_3.xvg
 ; do_dssp
 gmx do_dssp -s md_0_1.tpr -f md_0_1_noPBC.xtc -o dodssp_1.xpm -sc dodssp_1.xvg
 gmx do_dssp -s md_0_2.tpr -f md_0_2_noPBC.xtc -o dodssp_2.xpm -sc dodssp_2.xvg
-gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm -sc dodssp_3.xvg
+gmx do_dssp -s md_0_3.tpr -f md_0_3_noPBC.xtc -o dodssp_3.xpm -sc dodssp_3.xvg -a test.xpm
 
 ; ~~~~~~~~~~~~~~~~~~~~~~~~~~~xmgrace~~~~~~~~~~~~~~~~~~~~~~~~~~~
 xmgrace potential.xvg
@@ -66,3 +66,14 @@ xmgrace gyrate_3.xvg
 xmgrace dodssp_1.xvg
 xmgrace dodssp_2.xvg
 xmgrace dodssp_3.xvg
+
+; ~~~~~~~~~~~~~~~~~~~~~~~~~~~pymol~~~~~~~~~~~~~~~~~~~~~~~~~~~
+; dimero ab
+select wt, resid 43-8300
+
+gmx xpm2ps -f dodssp_1.xpm -o dodssp_1.eps
+
+gmx do_dssp -s md.tpr -f mdnopbc.xtc -o test.xpm -a testa.xpm
+gmx xpm2ps -f abdodssp_2.xpm -di ps.m2p -o abdodssp_2.eps
+gmx xpm2ps -f p1dodssp_3.xpm -di ps.m2p -o p1dodssp_3.eps
+gmx xpm2ps -f p3dodssp_3.xpm -di ps.m2p -o p3dodssp_3.eps
